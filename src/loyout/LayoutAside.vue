@@ -1,15 +1,12 @@
 
 <template>
-    <div class="brand">
-        Vue3Admin
-    </div>
     <el-menu
     default-active="1-4-1"
     class="el-menu-vertical-demo"
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
-    :collapse="isCollapse"
+    :collapse="collapse"
     @open="handleOpen"
     @close="handleClose">
         <el-submenu index="1">
@@ -44,17 +41,26 @@
         </el-menu-item>
     </el-menu>
 </template>
+<script>
+export default {
+  name: '',
+  props: {
+    collapse: Boolean
+  }
+}
+</script>
 
 <style lang="less" scoped>
-.brand{
-    height: 70px;
-    line-height: 70px;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    background-color: #545c64;
-}
+// .brand{
+//     height: @heightHeader;
+//     line-height: @heightHeader;
+//     width: 100%;
+//     text-align: center;
+//     color: #fff;
+//     background-color: #545c64;
+// }
 .el-menu-vertical-demo{
-    height: calc(100vh - 70px);
+    height: 100vh;
+    transition: width .5s;
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
     <div  class="layout">
-        <aside class="layout-aside">
-            <LayoutAside />
+        <aside
+        class="layout-aside"
+        :class="{'collapse': isCollapse}"
+        @mouseenter="() => isCollapse = false"
+        @mouseleave="() => isCollapse = true">
+            <LayoutAside :collapse="isCollapse" />
         </aside>
         <section class="layout-container">
             <header class="layout-container-header">
@@ -14,6 +18,7 @@
     </div>
 </template>
 <script>
+import { ref } from 'vue'
 import LayoutAside from './LayoutAside.vue'
 import LayoutHeader from './LayoutHeader.vue'
 export default {
@@ -21,31 +26,43 @@ export default {
   components: {
     LayoutAside,
     LayoutHeader
+  },
+  setup () {
+    const isCollapse = ref(true)
+
+    return {
+      isCollapse
+    }
   }
 }
 </script>
 <style lang="less" scoped>
 .layout{
+    position: relative;
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: flex-start;
     background-color: @colorBg;
     &-aside{
+        position: fixed;
+        left: 0;
         height: 100%;
-        width: 200px;
-        flex: 200px 0;
+        width: 250px;
+        z-index: 99;
+        translate: all .3s;
+        &.collapse{
+            width: 64px;
+        }
     }
     &-container{
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+        height: 100%;
+        padding-left: 64px;
         &-header{
-            flex: 70px 0;
+            height: @heightHeader;
         }
         &-content{
-            flex: 1;
+            height: calc(100% - @heightHeader);
             padding: 20px;
+            box-sizing: border-box;
         }
     }
 

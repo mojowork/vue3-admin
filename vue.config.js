@@ -1,11 +1,12 @@
 module.exports = {
+  publicPath: './',
+  outputDir: 'docs',
   css: {
     loaderOptions: {
       less: {
-        // http://lesscss.org/usage/#less-options-strict-units `Global Variables`
-        // `primary` is global variables fields name
         globalVars: {
-          colorBg: '#F5F7FB'
+          colorBg: '#F5F7FB',
+          heightHeader: '70px'
         }
       }
     }

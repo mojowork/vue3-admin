@@ -31,15 +31,16 @@ export default {
 
     .login-container {
         width: 100%;
+        min-width: 1000px;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: @colorBg;
         .login-content {
-            width: 450px;
+            flex: 450px 0;
             height: 422px;
-            margin-left: 100px;
+            margin-left: 80px;
             h5 {
                 text-align: center;
                 font-size: 28px;
