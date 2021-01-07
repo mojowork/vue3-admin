@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { install as userInstall } from './Users'
+import { install as dashbordInstall } from './Dashbord'
 
 export interface AppConfig {
   name: string;
@@ -21,6 +22,7 @@ export function gets (): AppConfig[] {
 let isInstall = false
 export function install () {
   if (!isInstall) {
+    dashbordInstall()
     userInstall()
   }
   isInstall = true

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["dashbord"],{8316:function(n,r,o){"use strict";function d(n,r,o,d,e,s){return" Dashbord "}o.r(r);var e={};e.render=d;r["default"]=e}}]);
+//# sourceMappingURL=dashbord.486f308f.js.map

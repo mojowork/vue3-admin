@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import(/* webpackChunkName: "global" */ '@/views/Error/404.vue')
   },
   {
-    path: '/*',
+    path: '/:path(.*)*',
     redirect: '/404'
   }
 ]

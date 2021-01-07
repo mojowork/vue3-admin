@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { install as appsInstall, gets as getApps } from '@/apps'
 import { routes as baseRoutes } from './route-data'
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes: baseRoutes
 })
 
-const appRoutes: RouteRecordRaw[] = []
+export const appRoutes: RouteRecordRaw[] = []
 appsInstall()
 getApps().forEach(app => {
   appRoutes.push(...app.routes)

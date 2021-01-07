@@ -1,51 +1,43 @@
 
 <template>
     <el-menu
-    default-active="1-4-1"
     class="el-menu-vertical-demo"
     background-color="#545c64"
     text-color="#fff"
-    active-text-color="#ffd04b"
+    router
     :collapse="collapse"
     @open="handleOpen"
     @close="handleClose">
-        <el-submenu index="1">
-            <template #title>
-                <i class="el-icon-location"></i>
-            <span>导航一</span>
+        <template v-for="(route, index) of routes" :key="index">
+            <template v-if="!route.meta?.hidden">
+                <el-menu-item  :index="route.path" v-if="route.meta?.isleaf || !route.children">
+                    <i :class="route.meta?.icon"></i>
+                    <template #title>{{route.meta?.title}}</template>
+                </el-menu-item>
+                <el-submenu :index="route.path" v-else>
+                    <template #title>
+                        <i :class="route.meta?.icon"></i>
+                        <span>{{route.meta?.title}}</span>
+                    </template>
+                    <template v-for="(subRoute, subIndex) of route.children" :key="`${index}-${subIndex}`">
+                        <el-menu-item :index="subRoute.path" v-if="!subRoute.meta?.hidden" >{{subRoute.meta?.title}}</el-menu-item>
+                    </template>
+                </el-submenu>
             </template>
-            <el-menu-item-group>
-            <template #title>分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-            <template #title>选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <template #title>导航二</template>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <template #title>导航三</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <template #title>导航四</template>
-        </el-menu-item>
+        </template>
     </el-menu>
 </template>
 <script>
+import { appRoutes as routes } from '../router/index'
 export default {
   name: '',
   props: {
     collapse: Boolean
+  },
+  setup () {
+    return {
+      routes
+    }
   }
 }
 </script>
