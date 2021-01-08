@@ -5,15 +5,15 @@
         </div>
         <el-card class="login-content" shadow="always">
             <h5>欢迎登录</h5>
-            <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="0px">
+            <el-form :model="loginFrom" status-icon ref="loginFrom" label-width="0px">
                 <el-form-item label="" prop="username">
-                    <el-input type="text" v-model="ruleForm" placeholder="请输入账户"></el-input>
+                    <el-input type="text" v-model="loginFrom.username" placeholder="请输入账户"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="passwd">
-                    <el-input type="password" v-model="ruleForm" placeholder="请输入密码" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="loginFrom.passwd" placeholder="请输入密码" autocomplete="off"></el-input>
                 </el-form-item>
                 <div class="login-btn">
-                    <el-button type="primary" >提交</el-button>
+                    <el-button type="primary" @click="submitForm">提交</el-button>
                 </div>
             </el-form>
         </el-card>
@@ -21,8 +21,31 @@
 </template>
 
 <script lang="ts">
+import { reactive } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { homePage } from '../../router'
 export default {
-  name: 'login'
+  name: 'login',
+  setup (props: any, ctx: any) {
+    const loginFrom = reactive({
+      username: 'chaos',
+      passwd: '123456'
+    })
+    const store = useStore()
+    const router = useRouter()
+    const submitForm = () => {
+      console.log('submitForm', store)
+      store.dispatch('user/LOGIN')
+        .then(data => {
+          router.push({ path: homePage })
+        })
+    }
+    return {
+      loginFrom,
+      submitForm
+    }
+  }
 
 }
 </script>
